@@ -1,0 +1,32 @@
+# Memory logs (private/noisy)
+memory/
+
+# Windows Zone Identifier junk
+*.Zone.Identifier
+*:Zone.Identifier
+
+# Bootstrap runtime state (not for repo)
+.openclaw/bootstrap-status.txt
+.openclaw/last-bootstrap.txt
+.openclaw/bootstrap-state.json
+.openclaw/workspace-state.json
+
+# Secrets - NEVER commit these
+.env
+*.key
+auth.json
+auth-profiles.json
+
+# Model weights
+*.bin
+*.gguf
+*.ggml
+*.pt
+*.safetensors
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log

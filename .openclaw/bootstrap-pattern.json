@@ -1,0 +1,16 @@
+{
+  "pattern": "System Interruption Recovery",
+  "auto_trigger": true,
+  "sequence": [
+    "detect_interruption",
+    "load_identity_layer",
+    "load_calibration_data",
+    "load_task_state",
+    "load_technical_state",
+    "present_bootstrap_summary",
+    "await_steering"
+  ],
+  "default_mode": "FULL_CONTINUE",
+  "user_override_window": 5,
+  "handoff_verification": "agent confirms identity + latest state + awaits steering"
+}
