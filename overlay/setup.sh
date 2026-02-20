@@ -9,6 +9,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OPENCLAW_DIR="$HOME/.openclaw"
 WORKSPACE_DIR="$OPENCLAW_DIR/workspace"
 
+escape_sed() {
+    printf '%s' "$1" | sed -e 's/[\/&|\\]/\\&/g'
+}
+
 echo "=== WilleeBot Overlay Setup ==="
 echo ""
 
@@ -54,8 +58,23 @@ cp "$SCRIPT_DIR/../persona/agents.md" "$WORKSPACE_DIR/AGENTS.md" 2>/dev/null && 
 echo ""
 echo "=== Applying model config ==="
 
-# Apply models.json overlay
-cp "$SCRIPT_DIR/models.json" "$OPENCLAW_DIR/agents/main/agent/models.json" 2>/dev/null && echo "✅ models.json applied" || echo "⚠️  models.json not found in overlay/"
+# Apply models.json overlay with key substitution
+MODELS_SRC="$SCRIPT_DIR/models.json"
+MODELS_DEST="$OPENCLAW_DIR/agents/main/agent/models.json"
+if [ -f "$MODELS_SRC" ]; then
+    tmp_models="$(mktemp)"
+    groq_key_escaped="$(escape_sed "$GROQ_API_KEY")"
+    openrouter_key_escaped="$(escape_sed "$OPENROUTER_API_KEY")"
+    gemini_key_escaped="$(escape_sed "$GEMINI_API_KEY")"
+    sed -e "s|__GROQ_API_KEY__|$groq_key_escaped|g" \
+        -e "s|__OPENROUTER_API_KEY__|$openrouter_key_escaped|g" \
+        -e "s|__GEMINI_API_KEY__|$gemini_key_escaped|g" \
+        "$MODELS_SRC" > "$tmp_models"
+    cp "$tmp_models" "$MODELS_DEST" 2>/dev/null && echo "✅ models.json applied" || echo "⚠️  Failed to apply models.json"
+    rm -f "$tmp_models"
+else
+    echo "⚠️  models.json not found in overlay/"
+fi
 
 echo ""
 echo "=== Setup complete ==="
