@@ -10,6 +10,7 @@ memory/
 .openclaw/last-bootstrap.txt
 .openclaw/bootstrap-state.json
 .openclaw/workspace-state.json
+.openclaw/
 
 # Secrets - NEVER commit these
 .env

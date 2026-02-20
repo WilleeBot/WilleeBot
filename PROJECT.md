@@ -1,7 +1,7 @@
 # WilleeBot — Project Status
 
 > Living document. Updated with every significant change.
-> Last updated: 2026-02-20 (model sync fixed)
+> Last updated: 2026-02-20 (three-component structure + repo separation)
 
 ---
 
@@ -16,6 +16,25 @@ OpenClaw handles infrastructure. WilleeBot is the application layer on top.
 
 ---
 
+## Three-Component Structure (Planned)
+
+1. **OpenClaw (Upstream Platform)**
+   - Public Git project, installed as-is
+   - Managed and updated by OpenClaw maintainers
+   - No local modifications
+
+2. **WilleeBot (Implementation Overlay)**
+   - This repo: persona, skills, models overlay, setup script
+   - Portable across machines
+   - Applies on top of a clean OpenClaw install
+
+3. **WilleeBot Data Vault (State & Generated Content)**
+   - Separate private repo or container
+   - Stores memory/logs, generated content, backups, and any stateful artifacts
+   - Enables backup/restore without contaminating overlay or OpenClaw
+
+---
+
 ## Current State
 
 | Area | Status | Notes |
@@ -24,6 +43,8 @@ OpenClaw handles infrastructure. WilleeBot is the application layer on top.
 | Telegram integration | ✅ Working | Native OpenClaw plugin |
 | Ollama local models | ✅ Running | qwen2.5, llama3.2, custom hp variants |
 | GitHub repo | ✅ Live | github.com/WilleeBot/WilleeBot |
+| Repo location | ✅ Separated | WilleeBot repo moved out of OpenClaw workspace |
+| Data vault | ✅ Initialized | /home/willee/WilleeBot-data (memory/state) |
 | Central .env secrets | ✅ Configured | ~/.openclaw/.env |
 | Model config sync | ✅ Fixed | openclaw.json defaults aligned; overlay setup injects keys into models.json |
 | Persona layer | 🔄 Partial | soul.md, identity.md exist, needs tuning |
@@ -37,6 +58,8 @@ OpenClaw handles infrastructure. WilleeBot is the application layer on top.
 
 ### Phase 1 — Stable Baseline (current)
 - [x] Fix model config sync between openclaw.json and models.json
+- [x] Separate repo from OpenClaw workspace
+- [x] Initialize data vault location for stateful artifacts
 - [ ] Confirm Telegram bot responding reliably with stable model
 - [ ] Archive legacy bot.py to legacy/
 - [ ] Restructure repo to match project layers
@@ -79,7 +102,8 @@ WilleeBot/
 ├── PROJECT.md          ← this file
 ├── CLAUDE.md           ← Claude Code orchestration brief
 ├── decisions/          ← implementation decision log
-├── persona/            ← soul.md, identity.md, I-αM-Ω configs
+├── overlay/            ← OpenClaw overlay (setup + models)
+├── persona/            ← soul.md, identity.md, agents.md, I-αM-Ω configs
 ├── skills/             ← custom OpenClaw skill files
 ├── projects/           ← active work artifacts
 ├── docs/               ← framework docs, architecture references
@@ -91,6 +115,7 @@ WilleeBot/
 ## Key Constraints
 
 - **Don't rebuild the platform** — use OpenClaw defaults for memory, heartbeat, sessions
+- **Keep repos separated** — OpenClaw workspace is not the WilleeBot repo
 - **One change at a time** — commit each addition, document the decision
 - **Secrets never in repo** — all keys in ~/.openclaw/.env only
 - **Legacy clearly separated** — bot.py and pre-OpenClaw code in legacy/ only
