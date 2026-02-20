@@ -1,0 +1,68 @@
+{
+  "providers": {
+    "groq": {
+      "baseUrl": "https://api.groq.com/openai/v1",
+      "apiKey": "__GROQ_API_KEY__",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "llama-3.1-8b-instant",
+          "name": "llama-3.1-8b-instant",
+          "reasoning": false,
+          "input": ["text"],
+          "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0},
+          "contextWindow": 131072,
+          "maxTokens": 8192
+        }
+      ]
+    },
+    "openrouter": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "apiKey": "__OPENROUTER_API_KEY__",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "meta-llama/llama-3.1-8b-instruct:free",
+          "name": "meta-llama/llama-3.1-8b-instruct:free",
+          "reasoning": false,
+          "input": ["text"],
+          "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0},
+          "contextWindow": 131072,
+          "maxTokens": 8192
+        }
+      ]
+    },
+    "gemini": {
+      "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai",
+      "apiKey": "__GEMINI_API_KEY__",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "gemini-2.0-flash",
+          "name": "gemini-2.0-flash",
+          "reasoning": false,
+          "input": ["text"],
+          "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0},
+          "contextWindow": 1048576,
+          "maxTokens": 8192
+        }
+      ]
+    },
+    "ollama": {
+      "baseUrl": "http://127.0.0.1:11434/v1",
+      "apiKey": "ollama-local",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "qwen2.5:3b-instruct-q4_K_M",
+          "name": "qwen2.5:3b-instruct-q4_K_M",
+          "reasoning": false,
+          "input": ["text"],
+          "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0},
+          "contextWindow": 128000,
+          "maxTokens": 8192
+        }
+      ]
+    }
+  }
+}
