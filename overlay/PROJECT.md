@@ -1,7 +1,7 @@
 # WilleeBot — Project Status
 
 > Living document. Updated with every significant change.
-> Last updated: 2026-02-20 (pivot: overlay architecture)
+> Last updated: 2026-02-20 (model sync fixed)
 
 ---
 
@@ -25,7 +25,7 @@ OpenClaw handles infrastructure. WilleeBot is the application layer on top.
 | Ollama local models | ✅ Running | qwen2.5, llama3.2, custom hp variants |
 | GitHub repo | ✅ Live | github.com/WilleeBot/WilleeBot |
 | Central .env secrets | ✅ Configured | ~/.openclaw/.env |
-| Model config sync | ⚠️ Needs fix | openclaw.json vs models.json out of sync |
+| Model config sync | ✅ Fixed | openclaw.json defaults aligned; overlay setup injects keys into models.json |
 | Persona layer | 🔄 Partial | soul.md, identity.md exist, needs tuning |
 | Skills | ❌ Not started | Custom skills not yet built |
 | Heartbeat | ❌ Not configured | Using OpenClaw default, not customized |
@@ -36,7 +36,7 @@ OpenClaw handles infrastructure. WilleeBot is the application layer on top.
 ## Active Goals
 
 ### Phase 1 — Stable Baseline (current)
-- [ ] Fix model config sync between openclaw.json and models.json
+- [x] Fix model config sync between openclaw.json and models.json
 - [ ] Confirm Telegram bot responding reliably with stable model
 - [ ] Archive legacy bot.py to legacy/
 - [ ] Restructure repo to match project layers
