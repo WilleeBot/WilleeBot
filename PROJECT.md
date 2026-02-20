@@ -104,6 +104,7 @@ WilleeBot/
 ├── decisions/          ← implementation decision log
 ├── overlay/            ← OpenClaw overlay (setup + models)
 ├── persona/            ← soul.md, identity.md, agents.md, I-αM-Ω configs
+├── scripts/            ← utilities (backup, maintenance)
 ├── skills/             ← custom OpenClaw skill files
 ├── projects/           ← active work artifacts
 ├── docs/               ← framework docs, architecture references
